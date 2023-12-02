@@ -47,7 +47,10 @@ const Departments = () => {
         {isCreateView && isManager ? (
           <AddDepartment />
         ) : (
-          <DataTable departments={departments} />
+          <DataTable
+            getDepartments={getDepartments}
+            departments={departments}
+          />
         )}
       </div>
     </AppLayout>
