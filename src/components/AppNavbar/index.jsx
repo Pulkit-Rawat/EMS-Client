@@ -15,15 +15,16 @@ const AppNavbar = () => {
   }
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar color="light" light expand="md" className="header">
         <NavbarBrand href="/" className="d-flex align-items-center"><img src={SampleLogo} style={{height:"25px",width:"25px"}} alt="logo" className="rounded-circle"/>EMS</NavbarBrand>
-        <Nav className="ml-auto" navbar>
-          <NavItem>
+        <Nav className="ml-auto- w-100" navbar>
+          {/* <NavItem>
             <NavLink href="/about">About</NavLink>
           </NavItem>
           <NavItem>
             <NavLink href="/contact">Contact</NavLink>
-          </NavItem>
+          </NavItem> */}
+          <NavItem className="d-flex flex-grow-1 justify-content-center align-items-center"><b>Employee Managment System</b></NavItem>
           <NavItem>
             <NavLink href="#" onClick={handleLogout}>Log out</NavLink>
           </NavItem>

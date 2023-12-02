@@ -9,7 +9,7 @@ const AppSidebar = () => {
   }
   return (
 
-    <Nav vertical className="sidebar  pt-3">
+    <Nav vertical className="sidebar  pt-3 ">
       <NavItem className="pointer" onClick={handleRedirect}>
         <Link to="/departments" className="text-dark nav-link">
          Departments

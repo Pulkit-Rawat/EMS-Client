@@ -16,7 +16,7 @@ const AppLayout = (props) => {
         <Col md={3} className="bg-light">
           <AppSidebar />
         </Col>
-      <Col md={9}>
+      <Col md={9} className="pt-3 ">
           {props.children}
       </Col>
       </Row>
