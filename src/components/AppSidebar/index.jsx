@@ -6,17 +6,19 @@ const AppSidebar = () => {
   return (
     <Nav vertical className="bg-light sidebar">
       <NavItem>
-        <NavLink>
+        <NavLink className="text-start">
           <Link to={"/departments"}>Departments</Link>
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink to="#">
+        <NavLink to="#" className="text-start">
           <Link to={"/employees"}>Employees</Link>
         </NavLink>
       </NavItem>
       <NavItem>
-        <NavLink to="#">Contacts</NavLink>
+        <NavLink to="#" className="text-start">
+          Contacts
+        </NavLink>
       </NavItem>
     </Nav>
   );

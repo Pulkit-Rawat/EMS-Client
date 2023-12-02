@@ -6,6 +6,7 @@ import { api } from "../../utilities/axios";
 import AddDepartment from "./AddDepartment";
 
 const Departments = () => {
+  const isManager = localStorage.getItem("role") == 1;
   const [isCreateView, setCreateView] = useState(false);
   const [departments, setDepartments] = useState([]);
 
@@ -32,16 +33,18 @@ const Departments = () => {
         <div className="text-center">
           <h4>Departments</h4>
         </div>
-        <div className="text-end bg-dark p-1">
-          <Button
-            onClick={() => setCreateView(!isCreateView)}
-            size="sm"
-            color="primary"
-          >
-            {isCreateView ? "View Departments" : "Create"}
-          </Button>
-        </div>
-        {isCreateView ? (
+        {isManager && (
+          <div className="text-end bg-dark p-1">
+            <Button
+              onClick={() => setCreateView(!isCreateView)}
+              size="sm"
+              color="primary"
+            >
+              {isCreateView ? "View Departments" : "Create"}
+            </Button>
+          </div>
+        )}
+        {isCreateView && isManager ? (
           <AddDepartment />
         ) : (
           <DataTable departments={departments} />
