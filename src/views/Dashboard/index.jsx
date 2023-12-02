@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, CardBody, Row, Col } from "reactstrap";
 import AppLayout from "../../layout";
+import { Card, CardBody, Row, Col } from "reactstrap";
 
 const index = () => {
   return (
