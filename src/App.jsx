@@ -6,16 +6,15 @@ import Login from "./views/Auth/Login";
 import Register from "./views/Auth/Register";
 
 import "./App.css";
+import EmployeeDetails from "./views/Employees/EmployeeDetails.";
 
 const Dashboard = lazy(() => import("./views/Dashboard"));
 const Departments = lazy(() => import("./views/Departments"));
 const Employees = lazy(() => import("./views/Employees"));
 
 function App() {
-  const [isAuth,setUserAuth] = useState(false)
     let token = localStorage.getItem("token")
  
-  console.log("isAuth",token)
   return (
     <div className="App" style={{height:"100vh"}}>
       <Suspense fallback={<div>Loading...</div>}>
@@ -26,6 +25,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/departments" element={<Departments />} />
             <Route path="/employees" element={<Employees />} />
+            <Route path="/employees/view/:id" element={<EmployeeDetails/>}/>
           </Routes>
           : 
           <Navigate to="/" element={<Login/>}/>

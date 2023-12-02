@@ -50,3 +50,10 @@
 .header{
   box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.5);
 }
+.text-start{
+  text-align: start;
+}
+
+.fw-light{
+  font-weight: normal !important;
+}
