@@ -111,6 +111,17 @@ const Register = () => {
               className="d-flex justify-content-between"
               style={{ textAlign: "left" }}
             >
+                <div>
+                <Label htmlFor="mob" className="text-white me-2">
+                  Manager
+                </Label>
+                <Input
+                  name="role"
+                  type="radio"
+                  value="1"
+                  onChange={() => handleChangeRole(2)}
+                />
+              </div>
               <div>
                 <Label htmlFor="mob" className="text-white me-2">
                   Employee
@@ -118,21 +129,11 @@ const Register = () => {
                 <Input
                   name="role"
                   type="radio"
-                  value="1"
+                  value="2"
                   onChange={() => handleChangeRole(1)}
                 />
               </div>
-              <div>
-                <Label htmlFor="mob" className="text-white me-2">
-                  Manager
-                </Label>
-                <Input
-                  name="role"
-                  type="radio"
-                  value="2"
-                  onChange={() => handleChangeRole(2)}
-                />
-              </div>
+            
             </FormGroup>
             {formik.errors.role && (
               <span style={{ color: "red" }}>{formik.errors.role}</span>

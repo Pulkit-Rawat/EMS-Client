@@ -9,7 +9,7 @@ const Employees = () => {
   const getAllEmployees = async () => {
     try {
       const { data } = await api.get("/getAllEmployee");
-      console.log("data", data);
+      console.log("data", data.data);
       if (data.success) {
         setRecords(data.data);
       }
@@ -28,12 +28,12 @@ const Employees = () => {
         <div className="text-center">
           <h4>Employees</h4>
         </div>
-        <div className="text-end bg-dark p-1">
-          <Button size="sm" color="primary">
+        {/* <div className="text-end bg-dark p-1">
+          <Button size="sm" color="primary" onClick={()=>handleViewEmployee(e)}>
             View
           </Button>
-        </div>
-        <DataTable />
+        </div> */}
+        <DataTable records={records}/>
       </div>
     </AppLayout>
   );

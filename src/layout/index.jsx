@@ -13,10 +13,10 @@ const AppLayout = (props) => {
         <Col md={12}>
         <AppNavbar />
         </Col>
-        <Col md={3} className="bg-light">
+        <Col md={3} lg={2} className="bg-light">
           <AppSidebar />
         </Col>
-      <Col md={9} className="pt-3 ">
+      <Col md={9} lg={10} className="pt-3 ">
           {props.children}
       </Col>
       </Row>

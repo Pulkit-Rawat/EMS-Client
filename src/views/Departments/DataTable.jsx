@@ -3,6 +3,7 @@ import { Table, Button } from "reactstrap";
 import { MdDeleteForever } from "react-icons/md";
 
 const DataTable = ({ departments = [] }) => {
+  const isManager = localStorage.getItem("role") == 1;
   return (
     <div className="bg-info">
       <Table striped>
@@ -25,7 +26,7 @@ const DataTable = ({ departments = [] }) => {
                     <Button className="me-3" color="primary" size="sm">
                       View
                     </Button>
-                    <MdDeleteForever size={24} color="red" />
+                    {isManager && <MdDeleteForever size={24} color="red" />}
                   </td>
                 </tr>
               ))
