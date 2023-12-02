@@ -9,12 +9,16 @@ const AppLayout = (props) => {
     //   {props.children}
     // </div>
     <Container className="m-0 p-0" fluid>
-      <Row>
+      <Row className="m-0 p-0">
+        <Col md={12}>
         <AppNavbar />
-        <div className="d-flex">
+        </Col>
+        <Col md={3} className="bg-light">
           <AppSidebar />
+        </Col>
+      <Col md={9}>
           {props.children}
-        </div>
+      </Col>
       </Row>
     </Container>
   );

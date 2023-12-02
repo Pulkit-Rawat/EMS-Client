@@ -33,7 +33,8 @@ const [message, setMessage] = useState("")
       console.log("res",data)
       if(data.success){
         localStorage.setItem("token",data.data.token)
-        history("/dashboard")
+        setTimeout(()=> history("/dashboard"),2000)
+       
       }
       // else{
       //  setMessage(data.message)

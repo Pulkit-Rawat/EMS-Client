@@ -1,0 +1,11 @@
+.sidebar{
+ .nav-item{
+  &:hover{
+    background-color: aquamarine;
+  }
+  .nav-link{
+    text-decoration: none;
+    
+  }
+ }
+}
