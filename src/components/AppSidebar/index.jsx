@@ -6,7 +6,6 @@ import { Link, useLocation } from "react-router-dom";
 const AppSidebar = () => {
   const [activeTab,setActiveTab] = useState(1)
   const {pathname} = useLocation()
-  console.log("currentUrl",pathname)
   useEffect(()=>{
     if(pathname.includes("/employees")){
       setActiveTab(2)

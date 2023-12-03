@@ -48,7 +48,7 @@ const Register = () => {
   const handleSubmit = async (values) => {
     try {
       const { data } = await api.post("/register", values);
-      console.log("data", data);
+      
     } catch (err) {
       console.log(err);
     }
