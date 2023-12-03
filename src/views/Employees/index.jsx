@@ -28,12 +28,7 @@ const Employees = () => {
         <div className="text-center">
           <h4>Employees</h4>
         </div>
-        {/* <div className="text-end bg-dark p-1">
-          <Button size="sm" color="primary" onClick={()=>handleViewEmployee(e)}>
-            View
-          </Button>
-        </div> */}
-        <DataTable records={records}/>
+        <DataTable records={records} />
       </div>
     </AppLayout>
   );
