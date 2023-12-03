@@ -1,47 +1,42 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import { Navigate, Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-import logo from "./logo.svg";
 import Login from "./views/Auth/Login";
 import Register from "./views/Auth/Register";
 
 import "./App.css";
+import DepartmentDetails from "./views/Departments/DepartmentDetails";
+import EmployeeDetails from "./views/Employees/EmployeeDetails.";
 
 const Dashboard = lazy(() => import("./views/Dashboard"));
 const Departments = lazy(() => import("./views/Departments"));
 const Employees = lazy(() => import("./views/Employees"));
 
-function App() {
-  const [isAuth,setUserAuth] = useState(false)
-    let token = localStorage.getItem("token")
- 
-  console.log("isAuth",token)
+const App = () => {
   return (
-    <div className="App" style={{height:"100vh"}}>
+    <div className="App" style={{ height: "100vh" }}>
       <Suspense fallback={<div>Loading...</div>}>
         <Router>
-          {token ?
           <Routes>
-            {/* <Route path="/" element={<Home/>} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/departments" element={<Departments />} />
+            <Route
+              path="/departments/view/:id"
+              element={<DepartmentDetails />}
+            />
             <Route path="/employees" element={<Employees />} />
+            <Route path="/employees/view/:id" element={<EmployeeDetails />} />
           </Routes>
-          : 
-          <Navigate to="/" element={<Login/>}/>
-          }
-
-          
           <Routes>
-          <Route path="/" element={<Login />} />
-            <Route path="/register" element={<Register/>} />
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
-           
-        
         </Router>
       </Suspense>
+      <ToastContainer hideProgressBar autoClose={1500} />
     </div>
   );
-}
+};
 
 export default App;

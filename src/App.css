@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: linear-gradient(to left top, #fbedbb, #fff);
 }
 
 .App-logo {
@@ -33,7 +34,7 @@
   /* position: fixed; */
   top: 0;
   left: 0;
-  width: 230px;
+  max-width: 230px;
 }
 
 @keyframes App-logo-spin {
@@ -44,9 +45,34 @@
     transform: rotate(360deg);
   }
 }
-.pointer{
+.pointer {
   cursor: pointer;
 }
-.header{
-  box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.5);
+.header {
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+}
+.text-start {
+  text-align: start;
+}
+
+.fw-light {
+  font-weight: normal !important;
+}
+.brand-img {
+  width: 30vw;
+  border-radius: 12px;
+}
+.auth-card {
+  background-color: #fefcf5 !important;
+  border: none !important;
+  box-shadow: 5px 12px 20px rgba(36, 37, 38, 0.13);
+}
+.signup-link {
+  margin-top: 8px;
+  color: rgb(114, 114, 255);
+}
+.signup-link > span {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
 }

@@ -23,15 +23,18 @@ const AddDepartment = () => {
     try {
       setLoading(true);
       const { data } = await api.post("/createDepartment", dptData);
-      console.log("create data: ", data);
-      if (!data.success) {
-        toast.error(data.message, {
-          hideProgressBar: true,
-          toastId: "err-dpt-toast",
-        });
+      if (data.success) {
+        setDptData(dptModel);
+        setLoading(false);
+        return toast.success(data.message);
       }
+      toast.error(data.message, {
+        hideProgressBar: true,
+        toastId: "err-dpt-toast",
+      });
       setDptData(dptModel);
       setLoading(false);
+      return;
     } catch (err) {
       setLoading(false);
       toast.error("Something went wrong.", {

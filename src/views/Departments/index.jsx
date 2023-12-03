@@ -23,7 +23,7 @@ const Departments = () => {
   };
 
   useEffect(() => {
-    if (isCreateView) return;
+    if (isCreateView) return () => {};
     getDepartments();
   }, [isCreateView]);
 
@@ -34,7 +34,7 @@ const Departments = () => {
           <h4>Departments</h4>
         </div>
         {isManager && (
-          <div className="text-end bg-dark p-1">
+          <div className="text-end p-1">
             <Button
               onClick={() => setCreateView(!isCreateView)}
               size="sm"

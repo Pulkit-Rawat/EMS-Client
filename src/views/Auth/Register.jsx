@@ -1,11 +1,27 @@
-import axios from "axios";
 import { useFormik } from "formik";
-import { Button, Card, CardBody, CardHeader, Container, Form, FormGroup, Input, Label } from "reactstrap";
+import EmsLogo from "../../assets/ems-brand.png";
+
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Row,
+  Col,
+} from "reactstrap";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 import { api } from "../../utilities/axios";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is required"),
     userName: Yup.string().required("Username is required"),
@@ -29,26 +45,20 @@ const Register = () => {
       handleSubmit(values);
     },
   });
-  // const handleSubmit = async (values)=>{
-  //   const headers = {
-  //     'Content-Type': 'application/json',
-  //     'Access-Control-Allow-Origin': '*',
-  //   };
-  //   try{
-  //     let res = await axios.post("http://localhost:4000/register",values,{headers:headers})
-  //     if(res){
-  //       console.log("inserted")
-  //     }
-  //   }
-  //   catch(err){
-  //     console.log(err)
-  //   }
-  // }
 
   const handleSubmit = async (values) => {
     try {
       const { data } = await api.post("/register", values);
-      console.log("data", data);
+      if (data.success) {
+        localStorage.setItem("token", data.data.token);
+        localStorage.setItem("role", data.data.role);
+        localStorage.setItem("userName", data.data.userName);
+        setTimeout(() => navigate("/dashboard"), 1000);
+        return;
+      }
+      if (!data.success) {
+        return toast.error(data.message || "Invalid credentials");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -59,105 +69,108 @@ const Register = () => {
   };
   return (
     <>
-      <Card className="bg-dark mx-auto mt-5" style={{ width: "500px" }}>
-        <CardBody className="p-5">
-          <CardHeader>
-            <h3 className="text-white">Sign Up</h3>
-          </CardHeader>
-          <Form onSubmit={formik.handleSubmit} className="h-100">
-            <FormGroup className="" style={{ textAlign: "left" }}>
-              <Label htmlFor="email" className="text-white">
-                Email
-              </Label>
-              <Input
-                name="email"
-                type="email"
-                placeholder="Email"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.email && (
-                <span style={{ color: "red" }}>{formik.errors.email}</span>
-              )}
-            </FormGroup>
-            <FormGroup className="" style={{ textAlign: "left" }}>
-              <Label htmlFor="userName" className="text-white ">
-                User Name
-              </Label>
-              <Input
-                name="userName"
-                type="text"
-                placeholder="User Name"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.userName && (
-                <span style={{ color: "red" }}>{formik.errors.userName}</span>
-              )}
-            </FormGroup>
-            <FormGroup className="" style={{ textAlign: "left" }}>
-              <Label htmlFor="mob" className="text-white ">
-                Contact
-              </Label>
-              <Input
-                name="mob"
-                type="number"
-                placeholder="Contact"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.mob && (
-                <span style={{ color: "red" }}>{formik.errors.mob}</span>
-              )}
-            </FormGroup>
-            <FormGroup
-              className="d-flex justify-content-between"
-              style={{ textAlign: "left" }}
-            >
-                <div>
-                <Label htmlFor="mob" className="text-white me-2">
-                  Manager
-                </Label>
-                <Input
-                  name="role"
-                  type="radio"
-                  value="1"
-                  onChange={() => handleChangeRole(2)}
-                />
-              </div>
-              <div>
-                <Label htmlFor="mob" className="text-white me-2">
-                  Employee
-                </Label>
-                <Input
-                  name="role"
-                  type="radio"
-                  value="2"
-                  onChange={() => handleChangeRole(1)}
-                />
-              </div>
-            
-            </FormGroup>
-            {formik.errors.role && (
-              <span style={{ color: "red" }}>{formik.errors.role}</span>
-            )}
-            <FormGroup className="" style={{ textAlign: "left" }}>
-              <Label htmlFor="password" className="text-white ">
-                Password
-              </Label>
-              <Input
-                name="password"
-                type="password"
-                placeholder="Password"
-                onChange={formik.handleChange}
-              />
-              {formik.errors.password && (
-                <span style={{ color: "red" }}>{formik.errors.password}</span>
-              )}
-            </FormGroup>
-            <Button type="submit" className="btn-primary">
-              Sign In
-            </Button>
-          </Form>
-        </CardBody>
-      </Card>
+      <Row className="align-items-center justify-content-center h-100 m-0 p-0">
+        <Col md={4}>
+          <img src={EmsLogo} className="brand-img" alt="" />
+        </Col>
+        <Col md={4}>
+          <Card className="mx-auto auth-card">
+            <CardBody className="p-5">
+              <h3>Sign Up</h3>
+              <Form onSubmit={formik.handleSubmit} className="h-100">
+                <FormGroup className="" style={{ textAlign: "left" }}>
+                  <Label htmlFor="userName">User Name</Label>
+                  <Input
+                    name="userName"
+                    type="text"
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors.userName && (
+                    <span style={{ color: "red" }}>
+                      {formik.errors.userName}
+                    </span>
+                  )}
+                </FormGroup>
+                <FormGroup className="text-start">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    name="email"
+                    type="email"
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors.email && (
+                    <span style={{ color: "red" }}>{formik.errors.email}</span>
+                  )}
+                </FormGroup>
+                <FormGroup className="text-start">
+                  <Label htmlFor="mob">Contact</Label>
+                  <Input
+                    name="mob"
+                    type="text"
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors.mob && (
+                    <span style={{ color: "red" }}>{formik.errors.mob}</span>
+                  )}
+                </FormGroup>
+                <FormGroup
+                  className="d-flex justify-content-between"
+                  style={{ textAlign: "left" }}
+                >
+                  <p>Role: </p>
+                  <div className="d-flex gap-3">
+                    <div>
+                      <Input
+                        name="role"
+                        type="radio"
+                        value="1"
+                        onChange={() => handleChangeRole(1)}
+                      />
+                      <Label htmlFor="mob" className="ms-2">
+                        Manager
+                      </Label>
+                    </div>
+                    <div>
+                      <Input
+                        name="role"
+                        type="radio"
+                        value="2"
+                        onChange={() => handleChangeRole(2)}
+                      />
+                      <Label htmlFor="mob" className="ms-2">
+                        Employee
+                      </Label>
+                    </div>
+                  </div>
+                </FormGroup>
+                {formik.errors.role && (
+                  <span style={{ color: "red" }}>{formik.errors.role}</span>
+                )}
+                <FormGroup className="text-start">
+                  <Label htmlFor="password">Password</Label>
+                  <Input
+                    name="password"
+                    type="password"
+                    onChange={formik.handleChange}
+                  />
+                  {formik.errors.password && (
+                    <span style={{ color: "red" }}>
+                      {formik.errors.password}
+                    </span>
+                  )}
+                </FormGroup>
+                <Button type="submit" color="primary">
+                  Sign In
+                </Button>
+              </Form>
+              <p className="signup-link">
+                Already a member?{" "}
+                <span onClick={() => navigate("/")}>Sign In!</span>
+              </p>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 };
